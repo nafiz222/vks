@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-100 min-h-screen flex flex-col">
+
+    <nav class="bg-teal-700 text-white px-6 py-4 flex justify-between items-center shadow-md">
+        <h1 class="text-xl font-bold">Admin Dashboard</h1>
+        <button id="logoutBtn" class="bg-orange-500 px-4 py-1.5 rounded-lg text-sm font-semibold hover:bg-orange-600">Logout</button>
+    </nav>
+
+    <main class="flex-1 p-8 max-w-6xl mx-auto w-full">
+        <div class="bg-white p-6 rounded-xl shadow">
+            <h2 id="welcomeText" class="text-2xl font-bold text-slate-800 mb-2">স্বাগতম!</h2>
+            <p class="text-slate-600">এখান থেকে আপনি সমস্ত অনলাইন অ্যাপ্লিকেশন এবং ইউজার ডাটা ম্যানেজ করতে পারবেন।</p>
+        </div>
+    </main>
+
+    <script>
+        // সিকিউরিটি চেক: লগইন করা না থাকলে ইনডেক্সে পাঠিয়ে দিবে
+        if (localStorage.getItem('admin_logged') !== 'true') {
+            window.location.href = 'index.html';
+        } else {
+            const user = localStorage.getItem('admin_user');
+            document.getElementById('welcomeText').textContent = `স্বাগতম, ${user}!`;
+        }
+
+        // লগআউট লজিক
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            localStorage.clear();
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>
